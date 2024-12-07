@@ -7,6 +7,9 @@
     "serverless-http": "^3.2.0"
   },
   "scripts": {
-    "start": "node api/index.js"
+    "dev": "netlify dev",
+    "start": "node app.js",
+    "deploy": "npm run build && netlify deploy",
+    "build": "echo 'No build needed for serverless functions'"
   }
 }
