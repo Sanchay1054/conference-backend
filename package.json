@@ -1,15 +1,18 @@
 {
-  "dependencies": {
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "mongoose": "^8.6.1",
-    "serverless-http": "^3.2.0"
-  },
+  "name": "conference-backend",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "netlify dev",
-    "start": "node app.js",
-    "deploy": "npm run build && netlify deploy",
-    "build": "echo 'No build needed for serverless functions'"
+    "start": "netlify dev",
+    "build": "echo 'Nothing to build'"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "@netlify/functions": "^1.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^3.0.0"
   }
 }
