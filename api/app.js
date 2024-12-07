@@ -68,9 +68,4 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-module.exports.handler = async (event, context) => {
-    context.callbackWaitsForEmptyEventLoop = false; // Prevent Vercel from freezing
-    await connectDB();
-    return serverless(app)(event, context);
-  };
-  
+module.exports = app;
