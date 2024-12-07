@@ -1,7 +1,7 @@
 const { Handler } = require('@netlify/functions');
 const mongoose = require('mongoose');
-const Registration = require('../register');
-const connectDB = require('../db');
+const Registration = require('.././../register');
+const connectDB = require('../../db');
 
 const handler = async (event, context) => {
   try {
