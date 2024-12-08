@@ -1,0 +1,166 @@
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="./Styles/register.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="navbar">INTERNATIONAL CONFERENCE ON APPLIED MATHEMATICS, AUTOMATION AND COMPUTING (ICAMAC25)</div>
+        <div class="registerhead">
+            <div>
+                <b>Bank Details: </b><br>
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Account Name</th>
+                        <td>Kongu Engineering College Grants</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Account No.</th>
+                        <td>1247155000001832</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Bank Name</th>
+                        <td>KARUR VYSYA BANK</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Branch Name</th>
+                        <td>Kec Nagar Branch</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Branch Code</th>
+                        <td>1247</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">IFSC Code</th>
+                        <td>KVBL0001247</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">MICR Code</th>
+                        <td>638053013</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">SWIFT Code</th>
+                        <td>KVBL001247</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Address</th>
+                        <td>Kongu Engineering College, Thoppupalayam, Perundurai - 638 060, Erode, Tamil Nadu</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="container">
+            <b class="registerhead" style="margin: 0px; padding: 0px;">Fee Details<br>Kindly Pay the Fee with the above details</b>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Faculty</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>PG Student / Research Scholar</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td>Listener</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td>Foreigners</td>
+                        <td>40 USD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container">
+            <b class="head">REGISTER</b>
+            <form class="form" id="myForm">
+                <div class="formt">
+                    Faculty / Research Scholar / Student
+                    <select name="category" required>
+                        <option value="Faculty" selected>Faculty</option>
+                        <option value="Research Scholar">Research Scholar</option>
+                        <option value="Student">Student</option>
+                    </select>
+                </div>
+                <div class="formt">
+                    Name
+                    <input type="text" name="name" id="name" placeholder="Enter your name" required />
+                </div>
+                <div class="formt">
+                    Phone Number (WhatsApp)
+                    <input type="text" name="phone" id="phone" placeholder="Enter your WhatsApp number" maxlength="10" required />
+                </div>
+                <div class="formt">
+                    Email
+                    <input type="email" name="email" id="email" placeholder="Enter your email" required />
+                </div>
+                <div class="formt">
+                    College
+                    <input type="text" name="college" id="college" placeholder="Enter college name" required />
+                </div>
+                <div class="formt">
+                    Department
+                    <input type="text" name="department" id="department" placeholder="Enter your department" required />
+                </div>
+                <div class="formt">
+                    (If Faculty / Research Scholar) Designation
+                    <input type="text" name="designation" id="designation" placeholder="Enter your designation"  />
+                </div>
+                <div class="formt">
+                    (If Student) Student Year
+                    <select name="student_year">
+                        <option value="1st Year" selected>I am a Faculty / Research Scholar</option>
+                        <option value="1st Year" >1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="formt">
+                    Listener or Participant
+                    <select name="role" required>
+                        <option value="Listener" selected>Listener</option>
+                        <option value="Participant">Participant</option>
+                    </select>
+                </div>
+                <div class="formt">
+                    Amount Paid or Not (Screenshot)
+                    <input type="file" name="payment_screenshot" style="border: none;" accept="image/*" required />
+                </div>
+                <div class="formt">
+                    Mode: Online or Offline
+                    <select name="mode" required>
+                        <option value="Online" selected>Online</option>
+                        <option value="Offline">Offline</option>
+                    </select>
+                </div>
+                <div style="margin: 10px;">
+                    <input type="checkbox" required> I have read the NOTICE fully
+                </div>
+                <button type="button" id="submitbutton" class="button">Submit</button>
+            </form>
+
+            <script src ="api.js"></script>
+
+            <div class="head">NOTICE</div>
+            <div class="text">
+                1. Accommodation will be on payment basis.<br>
+2. Quality presented papers will be published by Taylor & Francis as a proceedings book entitled "Applied Mathematics, Automation, and Computing" with a minimum publication charge.<br>
+3. The proceedings book will be submitted for indexing in Scopus.<br>
+4. Selected papers will also be published with Scopus-indexed book chapters with additional cost.
+            </div>
+        </div>
+    </body>
+</html>

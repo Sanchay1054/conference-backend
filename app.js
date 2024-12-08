@@ -3,9 +3,18 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 const bodyparser = require('body-parser');
+const path = require('path');
+
 
 // Middleware
-app.use(express.json());
+//app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
+
+// API endpoints
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from the backend!' });
+});
+
 
 
 const connectDB = require('./db');
@@ -18,11 +27,11 @@ app.use(cors());
 const Registration = require('./register');
 
 // Example route
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.send('Hello, MongoDB Atlas!');
 });
 
-app.post('/register',async (req, res) => {
+app.post('/api/register',async (req, res) => {
     try {
         const registration = new Registration({
             category: req.body.category,
@@ -53,7 +62,7 @@ app.post('/register',async (req, res) => {
 });
 
 // 2. View registered persons
-app.get('/registrations', async (req, res) => {
+app.get('/api/registrations', async (req, res) => {
     try {
         const registrations = await Registration.find();
         res.status(200).json(registrations);
@@ -61,6 +70,12 @@ app.get('/registrations', async (req, res) => {
         res.status(500).json({ error: 'Error fetching registrations', details: err.message });
     }
 });
+
+// Catch-all handler for any request not matched by the above
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+  
 
 // Start the server
 const PORT = process.env.PORT || 3000;

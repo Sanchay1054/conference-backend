@@ -5,13 +5,23 @@ connectDB();
 
 const app = express();
 
-app.use(express.json());
+//app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
+
+// API endpoints
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from the backend!' });
+});
+
+// Catch-all handler for any request not matched by the above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
+
 
 // app.use(cors());
 
-app.get("/",(req, res)=>{
-    res.send("Heelo World!");
-})
 
 const PORT = 3000;
 
