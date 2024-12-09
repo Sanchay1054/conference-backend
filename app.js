@@ -72,7 +72,7 @@ app.get('/api/registrations', async (req, res) => {
 
 // Catch-all handler for any request not matched by the above
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.send("Hello Go to icamac for registering, Thank you");
   });
   
 
