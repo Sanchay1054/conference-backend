@@ -2,8 +2,7 @@
   "name": "conference-backend",
   "version": "1.0.0",
   "scripts": {
-    "start": "netlify dev",
-    "build": "echo 'Nothing to build'"
+    "start": "node app.js"
   },
   "dependencies": {
     "@netlify/functions": "^1.0.0",
@@ -12,9 +11,6 @@
     "express": "^4.21.2",
     "mongoose": "^5.13.22",
     "path": "^0.12.7"
-  },
-  "devDependencies": {
-    "netlify-cli": "^3.0.0"
   },
   "main": "app.js",
   "repository": {
