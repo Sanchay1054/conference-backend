@@ -33,7 +33,8 @@ app.get('/api/', (req, res) => {
 
 app.post('/api/register',async (req, res) => {
     try {
-        const date = new Date().toISOString();
+        const date = new Date();
+        const dates1 = date.toISOString();
         const registration = new Registration({
           category: req.body.category,
           firstname: req.body.firstname,
@@ -50,7 +51,7 @@ app.post('/api/register',async (req, res) => {
           mode: req.body.mode,
           accomodation: req.body.accomodation,
           address: req.body.address,
-          time: date.slice(0,10)+" "+date.slice(11,20),
+          time: dates1.slice(0,10)+" "+String(date.getHours()).padStart(2, "0")+":"+String(date.getMinutes()).padStart(2, "0")+":"+String(date.getSeconds()).padStart(2, "0"),
         });
         console.log(req.body);
         await registration.save();
@@ -77,14 +78,15 @@ app.get('/api/registrations', async (req, res) => {
 
 app.post('/feedback',async (req,res)=>{
   try{
-    const date = new Date().toISOString();
+    const date = new Date();
+    const dates1 = date.toISOString();
     const feedback = new Feedback({
       name: req.body.name || null,
       phone: req.body.phonenumber || null,
       email: req.body.email || null,
       rating: req.body.rating || "not provided",
       feedback: req.body.feedback || null,
-      time: date.slice(0,10)+" "+date.slice(11,20),
+      time: dates1.slice(0,10)+" "+String(date.getHours()).padStart(2, "0")+":"+String(date.getMinutes()).padStart(2, "0")+":"+String(date.getSeconds()).padStart(2, "0"),
     });
     await feedback.save();
     res.send(`<div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div></div>`);
