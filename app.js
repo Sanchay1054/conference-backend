@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const Registration = require('./register');
+const Feedback = require('./feedback');
 
 // Example route
 app.get('/api/', (req, res) => {
@@ -50,12 +51,12 @@ app.post('/api/register',async (req, res) => {
         console.log(req.body);
         await registration.save();
         res.send(`
-            <p style="font-size:200%;">Registered Successfully</p>
+            <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div></div>
             `)
     } catch (err) {
         res.send(`
-            <p style="font-size:200%;">Error</p><br>
-            <p style="font-size:200%;">${err.message}</p>
+            <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div>
+      <div style="font-size:200%;">${err.message}</div></div>
             `)
     }
 });
@@ -70,9 +71,44 @@ app.get('/api/registrations', async (req, res) => {
     }
 });
 
+app.post('/feedback',async (req,res)=>{
+  try{
+    const feedback = new Feedback({
+      name: req.body.name || null,
+      phone: req.body.phonenumber || null,
+      email: req.body.email || null,
+      rating: req.body.rating || "not provided",
+      feedback: req.body.feedback || null,
+    });
+    await feedback.save();
+    res.send(`<div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div></div>`);
+  }
+  catch{
+    res.send(`
+      <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div>
+      <div style="font-size:200%;">${err.message}</div></div>
+      `)
+  }
+})
+
+app.get('/feedbacks',async (req,res)=>{
+  try{
+    const feedbacks = await Feedback.find();
+    res.status(200).json(feedbacks);
+  }
+  catch(err){
+    res.status(500).json({error: "Error fetching Feedbacks",message:err.message});
+  }
+})
+
 // Catch-all handler for any request not matched by the above
 app.get('*', (req, res) => {
+  try{
+    res.redirect('https://icamac.kongu.edu/');
+  }
+  catch{
     res.send("Hello Go to icamac for registering, Thank you");
+  }
   });
   
 
