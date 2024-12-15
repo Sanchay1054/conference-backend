@@ -33,20 +33,24 @@ app.get('/api/', (req, res) => {
 
 app.post('/api/register',async (req, res) => {
     try {
+        const date = new Date().toISOString();
         const registration = new Registration({
-            category: req.body.category,
-            name: req.body.name,
-            phone: req.body.phone,
-            email: req.body.email,
-            college: req.body.college,
-            department: req.body.department,
-            designation: req.body.designation || null,
-            student_year: req.body.student_year || null,
-            role: req.body.role,
-            payment_screenshot: req.file ? req.file.path : '',
-            mode: req.body.mode,
-            accommodation: req.body.accommodation,
-            notice_accepted: req.body.notice_accepted === 'true',
+          category: req.body.category,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          salutation: req.body.salutation || "",
+          phonenumber: req.body.phonenumber,
+          email: req.body.email,
+          institution: req.body.institution,
+          department: req.body.department,
+          designation: req.body.designation,
+          student_year: req.body.student_year,
+          presenter: req.body.presenter,
+          payment: req.body.payment,
+          mode: req.body.mode,
+          accomodation: req.body.accomodation,
+          address: req.body.address,
+          time: date.slice(0,10)+" "+date.slice(11,20),
         });
         console.log(req.body);
         await registration.save();
@@ -73,12 +77,14 @@ app.get('/api/registrations', async (req, res) => {
 
 app.post('/feedback',async (req,res)=>{
   try{
+    const date = new Date().toISOString();
     const feedback = new Feedback({
       name: req.body.name || null,
       phone: req.body.phonenumber || null,
       email: req.body.email || null,
       rating: req.body.rating || "not provided",
       feedback: req.body.feedback || null,
+      time: date.slice(0,10)+" "+date.slice(11,20),
     });
     await feedback.save();
     res.send(`<div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div></div>`);

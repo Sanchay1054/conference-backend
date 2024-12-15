@@ -7,6 +7,7 @@ const feedbackSchema = new mongoose.Schema({
     email: { type: String},
     rating: {type: String},
     feedback: {type: String},
+    time: {type: String},
 });
 
 // Export the model

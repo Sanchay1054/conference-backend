@@ -2,19 +2,22 @@ const mongoose = require('mongoose');
 
 // Define the schema
 const registrationSchema = new mongoose.Schema({
-    category: { type: String, required: true },
-    name: { type: String, required: true },
-    phone: { type: String, required: true },
-    email: { type: String, required: true },
-    college: { type: String, required: true },
-    department: { type: String, required: true },
-    designation: { type: String, default: null },
-    student_year: { type: String, default: null },
-    role: { type: String, required: true },
-    payment_screenshot: { type: String, default: "Not Paid"},
-    mode: { type: String, required: true },
+    category: { type: String, default: ""},
+    firstname: { type: String,},
+    lastname: { type: String,},
+    salutation: { type: String,},
+    phonenumber: { type: String,},
+    email: { type: String,},
+    institution: { type: String,},
+    department: { type: String,},
+    designation: { type: String, default: "I am a Student" },
+    student_year: { type: String, default: "I am a Student/Faculty/Research Scholar" },
+    presenter: { type: String,},
+    payment: { type: String, default: "Not Paid"},
+    mode: { type: String,},
     accommodation: { type: String, default: "Not Required"},
-    notice_accepted: { type: Boolean, required: true },
+    address: { type: String, },
+    time: {type: String},
 });
 
 // Export the model
