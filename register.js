@@ -15,7 +15,7 @@ const registrationSchema = new mongoose.Schema({
     presenter: { type: String,},
     payment: { type: String, default: "Not Paid"},
     mode: { type: String,},
-    accommodation: { type: String, default: "Not Required"},
+    accomodation: { type: String, default: "Not Required"},
     address: { type: String, },
     time: {type: String},
 });

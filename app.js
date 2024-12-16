@@ -33,13 +33,24 @@ app.get('/api/', (req, res) => {
 
 app.post('/api/register',async (req, res) => {
     try {
-        const date = new Date();
-        const dates1 = date.toISOString();
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        dateStyle: 'full',
+        timeStyle: 'medium',
+      });
+      let salutation = "";
+      if (Array.isArray(req.body.salutation)){
+        salutation = req.body.salutation.join(" ");
+      }
+      else{
+        salutation = req.body.salutation;
+      }
         const registration = new Registration({
           category: req.body.category,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
-          salutation: req.body.salutation || "",
+          salutation: salutation || "",
           phonenumber: req.body.phonenumber,
           email: req.body.email,
           institution: req.body.institution,
@@ -51,7 +62,7 @@ app.post('/api/register',async (req, res) => {
           mode: req.body.mode,
           accomodation: req.body.accomodation,
           address: req.body.address,
-          time: dates1.slice(0,10)+" "+String(date.getHours()).padStart(2, "0")+":"+String(date.getMinutes()).padStart(2, "0")+":"+String(date.getSeconds()).padStart(2, "0"),
+          time: formatter.format(now),
         });
         console.log(req.body);
         await registration.save();
@@ -60,7 +71,7 @@ app.post('/api/register',async (req, res) => {
             `)
     } catch (err) {
         res.send(`
-            <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div>
+            <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Error</div><br>
       <div style="font-size:200%;">${err.message}</div></div>
             `)
     }
@@ -78,22 +89,26 @@ app.get('/api/registrations', async (req, res) => {
 
 app.post('/feedback',async (req,res)=>{
   try{
-    const date = new Date();
-    const dates1 = date.toISOString();
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'full',
+      timeStyle: 'medium',
+    });
     const feedback = new Feedback({
       name: req.body.name || null,
       phone: req.body.phonenumber || null,
       email: req.body.email || null,
       rating: req.body.rating || "not provided",
       feedback: req.body.feedback || null,
-      time: dates1.slice(0,10)+" "+String(date.getHours()).padStart(2, "0")+":"+String(date.getMinutes()).padStart(2, "0")+":"+String(date.getSeconds()).padStart(2, "0"),
+      time: formatter.format(now),
     });
     await feedback.save();
     res.send(`<div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div></div>`);
   }
   catch{
     res.send(`
-      <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Registered Successfully</div>
+      <div style="display: flex; height: 100vh; align-items: center; justify-content: center; overflow-y: hidden;"><div style="font-size:200%; padding: 10px; font-weight: 600; background-color: rgb(17, 139, 17); border-radius: 20px; color: #FFF;">Error</div><br>
       <div style="font-size:200%;">${err.message}</div></div>
       `)
   }
