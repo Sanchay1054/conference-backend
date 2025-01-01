@@ -25,6 +25,7 @@ app.use(cors());
 
 const Registration = require('./register');
 const Feedback = require('./feedback');
+const Submission = require('./submission');
 
 // Example route
 app.get('/api/', (req, res) => {
@@ -121,6 +122,44 @@ app.get('/feedbacks',async (req,res)=>{
   }
   catch(err){
     res.status(500).json({error: "Error fetching Feedbacks",message:err.message});
+  }
+})
+
+app.post('/submission',async (req,res)=>{
+  try{
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'full',
+      timeStyle: 'medium',
+    });
+    const submission = new Submission({
+      title: req.body.title,
+      abstract: req.body.abstract,
+      keywords: req.body.keywords,
+      name: req.body.name,
+      institution: req.body.institution,
+      mail: req.body.mail,
+      description: req.body.description || "not given",
+      time: formatter.format(now),
+    });
+    await submission.save();
+    res.json({"message":"successfull"})
+  }
+  catch(err)
+  {
+    res.json({"message":"error"})
+  }
+})
+
+app.get('/submissiondetails',async (req,res)=>{
+  try{
+    const submissiondetails = await Submission.find();
+    res.status(200).json(submissiondetails);
+  }
+  catch(err)
+  {
+    res.status(500).json({error: "Error fetching Submission Details",message:err.message});
   }
 })
 
