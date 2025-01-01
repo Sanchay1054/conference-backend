@@ -139,6 +139,7 @@ app.post('/submission',async (req,res)=>{
       keywords: req.body.keywords,
       name: req.body.name,
       institution: req.body.institution,
+      department: req.body.department,
       mail: req.body.mail,
       description: req.body.description || "not given",
       time: formatter.format(now),

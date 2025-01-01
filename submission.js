@@ -5,6 +5,7 @@ const submissionSchema = new mongoose.Schema({
     name: [String],
     institution: [String],
     mail: [String],
+    department: [String],
     title: {type: String},
     abstract: {type: String},
     keywords: {type: String},
