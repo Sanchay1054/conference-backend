@@ -37,13 +37,13 @@ const sendEmail = async (recipient, subject, htmlContent) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'icamaac25@kongu.ac.in',
-      pass: 'Maac25@iac',//ajlfbxrqijhmbieu
+      user: 'md.sh@kongu.edu',//md.sh@kongu.edu
+      pass: 'mlpa yrhx fwzf rkuf',//ajlfbxrqijhmbieu     mlpa yrhx fwzf rkuf
     },
   });
 
   const mailOptions = {
-    from: 'icamaac25@kongu.ac.in',
+    from: 'md.sh@kongu.edu',
     to: recipient,
     subject: subject,
     html: htmlContent,
@@ -87,20 +87,19 @@ app.post('/api/register',async (req, res) => {
         });
         console.log(req.body);
         await registration.save();
-        /*const emailSubject = `Registration Confirmation for ICAMAC2025`;
+        const emailSubject = `Registration Confirmation for ICAMAC2025`;
         const emailContent = `
           <div style="background-color: #EEE; padding: 10px; font-family:Arial, Helvetica, sans-serif; border-radius: 20px; font-size: 110%;">
             <b style="font-size: 150%; margin-bottom: 20px;">Hello ${req.body.salutation} ${req.body.firstname} ${req.body.lastname}</b><br><br>
             Greetings from ICAMAC2025,<br><br>
-            <div style="max-width: 1200px;">You have registered for <a href='https://icamac.kongu.edu' style="color: #000; font-weight: 600; text-decoration: none;">ICAMAC2025</a> successfully.This prestigious event serves as a global platform for researchers, academics, and industry professionals to share their innovative ideas and breakthroughs in the fields of applied mathematics, automation, and computing. ICAMAC aims to foster collaboration, spark insightful discussions, and advance knowledge across these dynamic disciplines. Join us for a series of inspiring keynote speeches, technical sessions, and networking opportunities that will connect you with thought leaders and experts from around the world.</div><br>
-            <div>For abstract submission, visit:</div><br> <a href='https://icamac.kongu.edu/submission.html' style="color: #FFF; font-weight: 600; text-decoration: none; padding: 10px; background-color: #00F; border-radius: 10px; margin: 20px; width: fit-content;">Submission</a><br><br>
+            <div style="max-width: 1200px;">You have registered for <a href='https://icamac.kongu.edu' style="color: #000; font-weight: 600; text-decoration: none;">ICAMAC2025</a> successfully.<br>
             <div>For any enquiries, ask your query at:</div><br> <a href='https://icamac.kongu.edu/contactus.html' style="color: #FFF; font-weight: 600; text-decoration: none; padding: 10px; background-color: #00F; border-radius: 10px; margin: 20px; width: fit-content;">Enquire</a><br><br>
             Join us at ICAMAC 2025 as we shape the future of these vital fields.<br>
             Thank You!
             </div>
         `;
 
-        await sendEmail(req.body.email, emailSubject, emailContent);*/
+        await sendEmail(req.body.email, emailSubject, emailContent);
 
     // Respond to client
     res.status(200).json({ message: 'Data saved and email sent successfully' });
@@ -188,20 +187,20 @@ app.post('/submission',async (req,res)=>{
     });
     console.log(req.body.mail,req.body.mail[0]);
     await submission.save();
-    /*const emailSubject = `Abstract Submission Confirmation for ICAMAC2025`;
+    const emailSubject = `Abstract Submission Confirmation for ICAMAC2025`;
+    const registercontent = `<div>For registration, visit (Please ignore if already registered):</div><br> <a href='https://icamac.kongu.edu/register.html' style="color: #FFF; font-weight: 600; text-decoration: none; padding: 10px; background-color: #00F; border-radius: 10px; margin: 20px; width: fit-content;">Registration</a><br><br>`;
     const emailContent = `
       <div style="background-color: #EEE; padding: 10px; font-family:Arial, Helvetica, sans-serif; border-radius: 20px; font-size: 110%;">
         <b style="font-size: 150%; margin-bottom: 20px;">Hello ${req.body.name[0]}</b><br><br>
         Greetings from ICAMAC2025,<br><br>
-        <div style="max-width: 1200px;">You have submitted the abstract for <a href='https://icamac.kongu.edu' style="color: #000; font-weight: 600; text-decoration: none;">ICAMAC2025</a> titled <b>"${req.body.title}"</b> successfully.This prestigious event serves as a global platform for researchers, academics, and industry professionals to share their innovative ideas and breakthroughs in the fields of applied mathematics, automation, and computing. ICAMAC aims to foster collaboration, spark insightful discussions, and advance knowledge across these dynamic disciplines. Join us for a series of inspiring keynote speeches, technical sessions, and networking opportunities that will connect you with thought leaders and experts from around the world.</div><br>
-        <div>For registration, visit (Please ignore if already registered):</div><br> <a href='https://icamac.kongu.edu/register.html' style="color: #FFF; font-weight: 600; text-decoration: none; padding: 10px; background-color: #00F; border-radius: 10px; margin: 20px; width: fit-content;">Registration</a><br><br>
+        <div style="max-width: 1200px;">You have submitted the abstract for <a href='https://icamac.kongu.edu' style="color: #000; font-weight: 600; text-decoration: none;">ICAMAC2025</a> titled <b>"${req.body.title}"</b> successfully. You can able to Register only if your abstract is selected. You will be notified through an email, if your abstract is selected.<br><br>
         <div>For any enquiries, ask your query at:</div><br> <a href='https://icamac.kongu.edu/contactus.html' style="color: #FFF; font-weight: 600; text-decoration: none; padding: 10px; background-color: #00F; border-radius: 10px; margin: 20px; width: fit-content;">Enquire</a><br><br>
         Join us at ICAMAC 2025 as we shape the future of these vital fields.<br>
         Thank You!
         </div>
     `;
 
-    await sendEmail(req.body.mail[0], emailSubject, emailContent);*/
+    await sendEmail(req.body.mail[0], emailSubject, emailContent);
     res.json({"message":"successfull"})
   }
   catch(err)
@@ -240,12 +239,12 @@ app.post('/updatepayment',async (req,res)=>{
 
 app.post('/sendmail',async(req,res)=>{
   try{
-    /*const emailSubject = `Test mail from ICAMAC2025`;
+    const emailSubject = `Test mail from ICAMAC2025`;
     const emailContent = `
       <div>Hello, This is a text mail from ICAMAC2025</div>
     `;
 
-    await sendEmail(req.body.mail, emailSubject, emailContent);*/
+    await sendEmail(req.body.mail, emailSubject, emailContent);
     res.json({"message":"successfull"})
   }
   catch(err){
